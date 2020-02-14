@@ -1,4 +1,4 @@
 # PARCIAL 1
-## ARQUITECTURAS EMPRESARIALES
+## AREP
 
 ### Jimmy Andres Moya Suarez
