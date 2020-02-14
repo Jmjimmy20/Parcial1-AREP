@@ -29,7 +29,7 @@ public class Cliente{
         * Lee la segunda pagina del web server con un ejemplo de haber insertado la lista que contiene los números 1 2 3  
         */
         System.out.println("JSON RESULTADO:");
-        URL url2 = new URL("https://serene-mesa-21204.herokuapp.com/results?num=1+2+3");
+        URL url2 = new URL("https://serene-mesa-21204.herokuapp.com/results?num=1%2C2%2C3");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url2.openStream()))) {
 
             String inputLine = null;

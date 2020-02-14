@@ -48,17 +48,22 @@ public class WebServer{
     private static String resultsPageSort(Request req, Response res) {
         
         String[] a=req.queryParams("num").split(",");
+        String respuesta ="" ;
         List<Double> dataList = new ArrayList<Double>();
         for(int i=0;i<a.length;i++){
             dataList.add(Double.parseDouble(a[i]));
         } 
-        calculadora.Ordenar(dataList);
-
+        List<Double> listAux = calculadora.Ordenar(dataList);
+        
+        for(int i = 0; i<listAux.size();i++){
+            respuesta = respuesta +","+ listAux.get(i).toString();
+        }
+        
 
         String pageContent 
                 = "<!DOCTYPE html>" + "<html>" + "<body>" 
                 + "<center>" + "<h2>Resultado</h2>"
-                + "<h3> Ordenada: " + "mean" + "</h3>"
+                + "<h3> Ordenada: " + respuesta + "</h3>"
                 + "</center>" + "</body>" + "</html>";
         return pageContent;
     }

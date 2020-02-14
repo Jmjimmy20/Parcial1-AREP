@@ -13,22 +13,6 @@ public class Calculadora{
 
     }
 
-    /*public static <T> void main(String[] args)
-    {
-        List<Integer> prueba = new ArrayList<Integer>();
-        prueba.add(10);
-        prueba.add(-1);
-        prueba.add(8);
-        prueba.add(60);
-        prueba.add(2);
-        prueba =Ordenar(prueba);
-        System.out.println(prueba.get(0));
-        System.out.println(prueba.get(1));
-        System.out.println(prueba.get(2));
-        System.out.println(prueba.get(3));
-        System.out.println(prueba.get(4));
-    }*/
-
     public static <T extends Comparable<T>> int comparar(T dato1, T dato2) {
             
         //compara dato 1 con dato 2
