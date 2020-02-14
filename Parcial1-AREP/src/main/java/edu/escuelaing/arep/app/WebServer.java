@@ -4,18 +4,22 @@ import spark.Request;
 import spark.Response;
 import static spark.Spark.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.List;
 
 
 public class WebServer{
 
-    static ArrayList<Float> lista=new ArrayList<Float>(); 
+    //static ArrayList<Float> listaNumeros=new ArrayList<Float>(); 
     static Calculadora calculadora = new Calculadora();
 
     public static void main(String[] args){
         port(getPort());
          //get("/hello", (req, res) -> "Hello Heroku");
          get("/main", (req, res) -> mainPage(req, res));
-         get("/results", (req, res) -> resultsPage(req, res));
+         get("/results", (req, res) -> resultsPageSort(req, res));
     }
 
     private static String mainPage(Request req, Response res) {
@@ -23,30 +27,38 @@ public class WebServer{
                 = "<!DOCTYPE html>"
                 + "<html>"
                 + "<body>"
+                + "<center>"
                 + "<h1>PARCIAL 1</h1>"
                 + "<h2>AREP 2020-1</h2>"
                 + "<h2>Jimmy Moya</h2>"
                 + "<h3>Ingrese los numeros a operar</h3>"
                 + "<form action=\"/results\">"
-                + "  Ingrese los números separados por un espacio:<br>"
-                + "  <input type=\"text\" name=\"num\" placeholder=\"Ej. 1 2 3\">"
+                + "  Ingrese los números separados por coma(,):<br>"
+                + "  <input type=\"text\" name=\"num\" placeholder=\"Ej. 1,2,3\">"
                 + "  <br>"
                 + "  <br> <br>"                  
                 + "  <input type=\"submit\" value=\"Enviar\">"
                 + "</form>"
+                + "</center>"
                 + "</body>"
                 + "</html>";
         return pageContent;
     }
 
-    private static String resultsPage(Request req, Response res) {
-        //realizar proceso y llamar a la siguiente pagina 
+    private static String resultsPageSort(Request req, Response res) {
+        
+        String[] a=req.queryParams("num").split(",");
+        List<Double> dataList = new ArrayList<Double>();
+        for(int i=0;i<a.length;i++){
+            dataList.add(Double.parseDouble(a[i]));
+        } 
+        calculadora.Ordenar(dataList);
+
 
         String pageContent 
                 = "<!DOCTYPE html>" + "<html>" + "<body>" 
-                + "<center>" + "<h2>Resultados</h2>"
-                + "<h3> Promedio: " + "mean" + "</h3>"
-                + "<h3> Desviacion Estandar: " + "standard" + "</h3>"
+                + "<center>" + "<h2>Resultado</h2>"
+                + "<h3> Ordenada: " + "mean" + "</h3>"
                 + "</center>" + "</body>" + "</html>";
         return pageContent;
     }
